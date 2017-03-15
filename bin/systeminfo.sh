@@ -25,7 +25,7 @@ ramfreegb=$(echo "scale=2;$ramfree/1000000"|bc)
 uptime=$(uptime | grep -o '[0-9] days')
 if [[ -z $uptime ]];then uptime='less than 1 day';fi
 
-#Display collected information
+# display collected information
 echo -e "\e[1m$(delimiter)\e[21m"
 echo -e "Welcome, \e[32m$(whoami)\e[0m\n"
 echo -e "\e[1mHost:\t\e[21m$HOSTNAME\t\e[1mUptime:\t\e[21m$uptime"
