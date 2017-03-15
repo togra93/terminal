@@ -1,3 +1,8 @@
+# author: togra93
+# last updated: 2017-03-14
+# configuration of terminator
+# using color scheme solarized dark
+
 [global_config]
   borderless = True
   hide_tabbar = True
