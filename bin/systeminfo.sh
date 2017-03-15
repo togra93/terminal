@@ -3,7 +3,7 @@
 # collecting and displaying system information
 
 delimiter(){
-    for i in `seq 1 70`;do
+        for i in `seq 1 $(tput cols)`;do
         echo -n '-';
     done
 }
