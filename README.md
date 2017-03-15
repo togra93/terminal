@@ -10,3 +10,6 @@ paths.
 My .bash_aliases contains many customized commands to facilitate my work.
 The purpose of .bash_functions is to keep the same working experience on diffrent
 systems. It's a collection of pseudo commands that work on many platforms.
+
+Configuration files for vim, terminator and liquidprompt are also included.
+setup.sh basically creates symlinks and takes care of already existing files.
