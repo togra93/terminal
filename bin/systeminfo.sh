@@ -3,8 +3,8 @@
 # collecting and displaying system information
 
 delimiter(){
-        for i in `seq 1 $(tput cols)`;do
-        echo -n '-';
+    for i in `seq 1 $(tput cols)`;do
+       echo -n '-';
     done
 }
 
@@ -37,7 +37,7 @@ echo -ne "\e[1mUsers on this machine:\t\e[21m"
 if [ -z "$(echo -n $others)" ]; then
         echo "Nobody else ..."
 else
-        echo -e "\n\t$others"
+        echo -e "\t$others"
 fi
 
 echo -e "\e[1m$(delimiter)\e[21m"
