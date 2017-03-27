@@ -4,7 +4,7 @@
 
 USER_PATHS=~/bin/ # add paths with leading colon
 USER_FILES=(~/.bash_aliases ~/.bash_functions) # add files with leading space
-LPDIR=~/.liquidprompt/
+LPDIR=~/git/liquidprompt/
 IFS_ORIG=$IFS
 
 # source global definitions
