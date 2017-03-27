@@ -10,13 +10,11 @@ vLIQPROM=false
 vLIQPROMLINK="https://github.com/nojhan/liquidprompt.git"
 
 # link dotfiles 
-shopt -s dotglob
-for i in ../dotfiles/*;do
+for i in ../dotfiles/.bash*;do
     vORIGFILE=~/$(basename $i)
     [ -e $vORIGFILE ] && mv $vORIGFILE $vORIGFILE.old
     ln -s $i ~/
 done
-shopt -u dotglob
 
 # make bin folder and link binaries
 [ ! -d $vBINDIR ] && mkdir $vBINDIR
