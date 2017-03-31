@@ -30,10 +30,10 @@ done
 # need to write function to query installed software on multiple distros first
 
 # optional: clone liquidprompt and link config
-[ $vLIQPROM ] && {
+($vLIQPROM) && {
     vLIQPROMORIG=~/.liquidpromptrc
     if [ -e $vLIQPROMORIG ];then
-        mv $vLIQPROMPORIG $vLIQPROMORIG.old \
+        mv $vLIQPROMORIG $vLIQPROMORIG.old \
             && echo "saving existing file $vLIQPROMORIG to $vLIQPROMORIG.old"
     else
        [ ! -d $vGITDIR ] && mkdir $vGITDIR && echo "creating git directory $vGITDIR ..."
