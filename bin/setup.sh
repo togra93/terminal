@@ -15,13 +15,13 @@ vDOTFILES=$vBASEDIR/dotfiles/.[!.]*
 for i in $vDOTFILES;do
     vORIGFILE=~/$(basename $i)
     [ -e $vORIGFILE ] && mv $vORIGFILE $vORIGFILE.old
-    ln -s $i ~/
+    ln -s $i ~
 done
 
 # make bin folder and link binaries
 [ ! -d $vBINDIR ] && mkdir $vBINDIR
 for i in $vBASEDIR/bin/*;do
-    [ $i != "$vBASEDIR/bin/$(basename $0)" ] && ln -s $i $vBINDIR
+    [ $(basename $i) != $(basename $0) ] && ln -s $i $vBINDIR
 done
 
 # optional: clone liquidprompt and link config
