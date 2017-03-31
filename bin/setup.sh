@@ -24,6 +24,9 @@ for i in $vBASEDIR/bin/*;do
     [ $(basename $i) != $(basename $0) ] && ln -s $i $vBINDIR
 done
 
+# check terminator config
+# need to write function to query installed software on multiple distros first
+
 # optional: clone liquidprompt and link config
 [ $vLIQPROM ] && {
     vLIQPROMORIG=~/.liquidpromptrc
