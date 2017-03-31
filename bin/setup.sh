@@ -14,14 +14,16 @@ vLIQPROMLINK="https://github.com/nojhan/liquidprompt.git"
 vDOTFILES=$vBASEDIR/dotfiles/.[!.]*
 for i in $vDOTFILES;do
     vORIGFILE=~/$(basename $i)
-    [ -e $vORIGFILE ] && mv $vORIGFILE $vORIGFILE.old
-    ln -s $i ~
+    [ -e $vORIGFILE ] && mv $vORIGFILE $vORIGFILE.old \
+        && echo "saving existing file $vORIGFILE to $vORIGFILE.old ..."
+ln -s $i ~ && echo "creating symlink from $i to ~/$(basename $i) ..."
 done
 
 # make bin folder and link binaries
-[ ! -d $vBINDIR ] && mkdir $vBINDIR
+[ ! -d $vBINDIR ] && mkdir $vBINDIR && echo "creating binary directory $vBINDIR ..."
 for i in $vBASEDIR/bin/*;do
-    [ $(basename $i) != $(basename $0) ] && ln -s $i $vBINDIR
+    [ $(basename $i) != $(basename $0) ] && ln -sf $i $vBINDIR \
+        && echo "creating symlink from $i to $vBINDIR/$(basename $i) ..."
 done
 
 # check terminator config
@@ -31,13 +33,15 @@ done
 [ $vLIQPROM ] && {
     vLIQPROMORIG=~/.liquidpromptrc
     if [ -e $vLIQPROMORIG ];then
-        mv $vLIQPROMPORIG $vLIQPROMORIG.old
+        mv $vLIQPROMPORIG $vLIQPROMORIG.old \
+            && echo "saving existing file $vLIQPROMORIG to $vLIQPROMORIG.old"
     else
-       [ ! -d $vGITDIR ] && mkdir $vGITDIR
-       git clone -q $vLIQPROMLINK $vGITDIR
+       [ ! -d $vGITDIR ] && mkdir $vGITDIR && echo "creating git directory $vGITDIR ..."
+       git clone -q $vLIQPROMLINK $vGITDIR && echo "cloning liquidprompt repository ..."
     fi
-    ln -s $vBASEDIR/liquidprompt/.liquidpromptrc $vLIQPROMORIG 
+    ln -s $vBASEDIR/liquidprompt/.liquidpromptrc $vLIQPROMORIG \
+        && echo "creating symlink from $vBASEDIR/liquidprompt/.liquidpromptrc to $vLIQPROMORIG ..." 
 }
 
 # finally source .bashrc
-. ~/.bashrc
+. ~/.bashrc && echo "sourcing bashrc ..."
