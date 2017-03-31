@@ -3,7 +3,7 @@
 # configure shell, using given files
 # basically backup old ones and create symlinks
 
-vBASEDIR=pwd | sed s#"/bin$"##
+vBASEDIR=$(pwd | sed s#"/bin$"##)
 vBINDIR=~/bin
 vGITDIR=~/git
 # set true, if you want to check and even clone the liquidprompt setup
