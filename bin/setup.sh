@@ -10,7 +10,8 @@ vLIQPROM=false
 vLIQPROMLINK="https://github.com/nojhan/liquidprompt.git"
 
 # link dotfiles 
-for i in ../dotfiles/.bash*;do
+vDOTFILES=../dotfiles/.[!.]*
+for i in $vDOTFILES;do
     vORIGFILE=~/$(basename $i)
     [ -e $vORIGFILE ] && mv $vORIGFILE $vORIGFILE.old
     ln -s $i ~/
@@ -19,7 +20,8 @@ done
 # make bin folder and link binaries
 [ ! -d $vBINDIR ] && mkdir $vBINDIR
 for i in ../bin/*;do
-    ln -s $i $vBINDIR
+    [ $i != "../bin/$(basename $0)" ] && ln -s $i $vBINDIR
+done
 
 # optional: clone liquidprompt and link config
 [ $vLIQPROM ] && {
@@ -27,10 +29,10 @@ for i in ../bin/*;do
     if [ -e $vLIQPROMORIG ];then
         mv $vLIQPROMPORIG $vLIQPROMORIG.old
     else
-        [ ! -d $vGITDIR ] && mkdir $vGITDIR
-        git clone -q $vLIQPROMLINK $vGITDIR
+       [ ! -d $vGITDIR ] && mkdir $vGITDIR
+       git clone -q $vLIQPROMLINK $vGITDIR
     fi
-    ln -s ../liquidprompt/.liquidpromptrc ~/.liquidpromptrc
+    ln -s ../liquidprompt/.liquidpromptrc $vLIQPROMORIG 
 }
 
 # finally source .bashrc
