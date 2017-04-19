@@ -1,5 +1,5 @@
 # author: togra93
-# last updated: 2017-03-31
+# last updated: 2017-04-19
 # configure shell, using given files
 # basically backup old ones and create symlinks
 
@@ -14,13 +14,17 @@ vLIQPROMLINK="https://github.com/nojhan/liquidprompt.git"
 vDOTFILES=$vBASEDIR/dotfiles/.[!.]*
 for i in $vDOTFILES;do
     vORIGFILE=~/$(basename $i)
-    if ! [ -h $vORIGFILE -a $(readlink -f $vORIGFILE) = $i ];then
-    {
-        [ -e $vORIGFILE ] && mv $vORIGFILE $vORIGFILE.old \
-            && echo "saving existing file $vORIGFILE to $vORIGFILE.old ..."
-        ln -s $i ~ && echo "creating symlink from $i to ~/$(basename $i) ..."
-    }
-    else echo "$vORIGFILE: nothing to do ..."
+    if [ -e $vORIGFILE ];then
+        if ! [ -h $vORIGFILE -a $(readlink -f $vORIGFILE) = $i ];then
+        {
+            mv $vORIGFILE $vORIGFILE.old \
+                && echo "saving existing file $vORIGFILE to $vORIGFILE.old ..."
+            ln -s $i ~ && echo "creating symlink from $i to ~/$(basename $i) ..."
+        }
+        else echo "$vORIGFILE: nothing to do ..."
+        fi
+    else ln -s $i ~ && echo "creating symlink from $i to ~/$(basename $i) ..."
+    fi
 done
 
 # make bin folder and link binaries
@@ -43,7 +47,7 @@ done
        [ ! -d $vGITDIR ] && mkdir $vGITDIR && echo "creating git directory $vGITDIR ..."
        git clone -q $vLIQPROMLINK $vGITDIR && echo "cloning liquidprompt repository ..."
     fi
-    ln -s $vBASEDIR/liquidprompt/.liquidpromptrc $vLIQPROMORIG \
+    ln -sf $vBASEDIR/liquidprompt/.liquidpromptrc $vLIQPROMORIG \
         && echo "creating symlink from $vBASEDIR/liquidprompt/.liquidpromptrc to $vLIQPROMORIG ..."
 }
 
