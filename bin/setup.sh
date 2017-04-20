@@ -10,6 +10,7 @@ vGITDIR=~/git
 vLIQPROM=false
 vLIQPROMLINK="https://github.com/nojhan/liquidprompt.git"
 
+' 
 # link dotfiles
 vDOTFILES=$vBASEDIR/dotfiles/.[!.]*
 for i in $vDOTFILES;do
@@ -26,13 +27,20 @@ for i in $vDOTFILES;do
     else ln -s $i ~ && echo "creating symlink from $i to ~/$(basename $i) ..."
     fi
 done
+'
+# well ...
+rsync -rb --suffix=".bak" $vBASEDIR/dotfiles/ ~
 
+'
 # make bin folder and link binaries
 [ ! -d $vBINDIR ] && mkdir $vBINDIR && echo "creating binary directory $vBINDIR ..."
 for i in $vBASEDIR/bin/*;do
     [ $(basename $i) != $(basename $0) ] && ln -sf $i $vBINDIR \
         && echo "creating symlink from $i to $vBINDIR/$(basename $i) ..."
 done
+'
+# well ...
+rsync -rb --suffix=".bak" --exclude="setup.sh" $vBASEDIR/bin $vBINDIR
 
 # check terminator config
 # need to write function to query installed software on multiple distros first
@@ -40,7 +48,7 @@ done
 # optional: clone liquidprompt and link config
 ($vLIQPROM) && {
     vLIQPROMORIG=~/.liquidpromptrc
-    if [ -e $vLIQPROMORIG ];then
+    if [ -e $vLIQPROMORIG -o -d $vGITDIR/liquidprompt ];then
         mv $vLIQPROMORIG $vLIQPROMORIG.old \
             && echo "saving existing file $vLIQPROMORIG to $vLIQPROMORIG.old"
     else
