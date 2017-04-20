@@ -45,7 +45,7 @@ done
             && echo "saving existing file $vLIQPROMORIG to $vLIQPROMORIG.old"
     else
        [ ! -d $vGITDIR ] && mkdir $vGITDIR && echo "creating git directory $vGITDIR ..."
-       git clone -q $vLIQPROMLINK $vGITDIR && echo "cloning liquidprompt repository ..."
+       git clone -q $vLIQPROMLINK $vGITDIR/liquidprompt && echo "cloning liquidprompt repository ..."
     fi
     ln -sf $vBASEDIR/liquidprompt/.liquidpromptrc $vLIQPROMORIG \
         && echo "creating symlink from $vBASEDIR/liquidprompt/.liquidpromptrc to $vLIQPROMORIG ..."
