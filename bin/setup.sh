@@ -6,40 +6,15 @@
 vBASEDIR=$(pwd | sed s#"/bin$"##)
 vBINDIR=~/bin
 vGITDIR=~/git
+
 # set true, if you want to check and even clone the liquidprompt setup
 vLIQPROM=false
 vLIQPROMLINK="https://github.com/nojhan/liquidprompt.git"
 
-' 
-# link dotfiles
-vDOTFILES=$vBASEDIR/dotfiles/.[!.]*
-for i in $vDOTFILES;do
-    vORIGFILE=~/$(basename $i)
-    if [ -e $vORIGFILE ];then
-        if ! [ -h $vORIGFILE -a $(readlink -f $vORIGFILE) = $i ];then
-        {
-            mv $vORIGFILE $vORIGFILE.old \
-                && echo "saving existing file $vORIGFILE to $vORIGFILE.old ..."
-            ln -s $i ~ && echo "creating symlink from $i to ~/$(basename $i) ..."
-        }
-        else echo "$vORIGFILE: nothing to do ..."
-        fi
-    else ln -s $i ~ && echo "creating symlink from $i to ~/$(basename $i) ..."
-    fi
-done
-'
-# well ...
+# sync dotfiles
 rsync -rb --suffix=".bak" $vBASEDIR/dotfiles/ ~
 
-'
-# make bin folder and link binaries
-[ ! -d $vBINDIR ] && mkdir $vBINDIR && echo "creating binary directory $vBINDIR ..."
-for i in $vBASEDIR/bin/*;do
-    [ $(basename $i) != $(basename $0) ] && ln -sf $i $vBINDIR \
-        && echo "creating symlink from $i to $vBINDIR/$(basename $i) ..."
-done
-'
-# well ...
+# sync binaries
 rsync -rb --suffix=".bak" --exclude="setup.sh" $vBASEDIR/bin $vBINDIR
 
 # check terminator config
@@ -47,16 +22,18 @@ rsync -rb --suffix=".bak" --exclude="setup.sh" $vBASEDIR/bin $vBINDIR
 
 # optional: clone liquidprompt and link config
 ($vLIQPROM) && {
-    vLIQPROMORIG=~/.liquidpromptrc
-    if [ -e $vLIQPROMORIG -o -d $vGITDIR/liquidprompt ];then
-        mv $vLIQPROMORIG $vLIQPROMORIG.old \
-            && echo "saving existing file $vLIQPROMORIG to $vLIQPROMORIG.old"
-    else
-       [ ! -d $vGITDIR ] && mkdir $vGITDIR && echo "creating git directory $vGITDIR ..."
-       git clone -q $vLIQPROMLINK $vGITDIR/liquidprompt && echo "cloning liquidprompt repository ..."
+    if [ ! $PROMPT_COMMAND = "_lp_set_prompt" ];then
+        if [ -d $vGITDIR/liquidprompt ]; then
+            echo "--- ERROR: Directory $vGITDIR/liquidprompt already exists,"
+            echo "--- although I couldn't find active Liquidprompt ..."
+            echo "--- Aborting. Please check configuration!\n" -e
+            exit 1
+        else
+            [ ! -d $vGITDIR ] && mkdir $vGITDIR
+            git clone -q $vLIQPROMLINK $vGITDIR/liquidprompt
+        fi
     fi
-    ln -sf $vBASEDIR/liquidprompt/.liquidpromptrc $vLIQPROMORIG \
-        && echo "creating symlink from $vBASEDIR/liquidprompt/.liquidpromptrc to $vLIQPROMORIG ..."
+    rsync -b --suffix=".bak" $vBASEDIR/liquidprompt/.liquidpromptrc ~
 }
 
 # finally source .bashrc
