@@ -20,9 +20,9 @@ rsync -rb --suffix=".bak" --exclude="setup.sh" $vBASEDIR/bin $vBINDIR
 # check terminator config
 # need to write function to query installed software on multiple distros first
 
-# optional: clone liquidprompt and link config
+# optional: clone/setup liquidprompt
 ($vLIQPROM) && {
-    if [ ! $PROMPT_COMMAND = "_lp_set_prompt" ];then
+    if [ ! $PROMPT_COMMAND = "_lp_set_prompt" ];then # something's wrong
         if [ -d $vGITDIR/liquidprompt ]; then
             echo "--- ERROR: Directory $vGITDIR/liquidprompt already exists,"
             echo "--- although I couldn't find active Liquidprompt ..."
@@ -36,5 +36,5 @@ rsync -rb --suffix=".bak" --exclude="setup.sh" $vBASEDIR/bin $vBINDIR
     rsync -b --suffix=".bak" $vBASEDIR/liquidprompt/.liquidpromptrc ~
 }
 
-# finally source .bashrc
-. ~/.bashrc && echo "sourcing bashrc ..."
+echo -e "\n--- Process finished ..."
+echo -e "--- Please run the following command once \e[32msource ~/.bashrc\e[0m"
