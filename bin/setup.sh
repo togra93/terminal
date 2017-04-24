@@ -17,7 +17,14 @@ vPROMPT_COMMAND='_lp_set_prompt'
 echo "--------------------------------------"
 echo "--- Setting up your Shell/Terminal ---"
 echo "--------------------------------------"
-echo -e "\nAll existing files will be moved to <FILE>.bak.
+echo -e "\nAll existing files will be moved to <FILE>.bak."
+echo "Do you wish to install this program?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes )   echo "Starting script ..."; break;;
+        No )    exit && echo "---INFO: Aborting.";;
+    esac
+    done
 
 # sync dotfiles
 rsync -rb --suffix=".bak" $vBASEDIR/dotfiles/ ~ && echo -e "--- INFO: Copying dotfles successful.\n"
