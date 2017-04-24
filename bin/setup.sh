@@ -21,10 +21,10 @@ echo -e "\nAll existing files will be moved to <FILE>.bak."
 echo "Do you wish to install this program?"
 select yn in "Yes" "No"; do
     case $yn in
-        Yes )   echo "Starting script ..."; break;;
-        No )    exit && echo "---INFO: Aborting.";;
+        Yes)   echo "Starting script ...";;
+        No)    exit && echo "---INFO: Aborting.";;
     esac
-    done
+done
 
 # sync dotfiles
 rsync -rb --suffix=".bak" $vBASEDIR/dotfiles/ ~ && echo -e "--- INFO: Copying dotfles successful.\n"
