@@ -19,8 +19,7 @@ echo "--------------------------------------"
 echo "--- Setting up your Shell/Terminal ---"
 echo "--------------------------------------"
 echo -e "\nAll existing files will be moved to <FILE>.bak."
-echo "Do you wish to install this program?"
-read -p "Is this a good question (y/n)? " answer
+read -p "Do you want to run this script (y/n)?" answer
 case ${answer:0:1} in
     y|Y )
         echo "Starting Script ...";;
