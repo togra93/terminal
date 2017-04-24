@@ -14,17 +14,21 @@ vLIQPROMLINK="https://github.com/nojhan/liquidprompt.git"
 vPROMPT_COMMAND='_lp_set_prompt'
 
 # information
+clear
 echo "--------------------------------------"
 echo "--- Setting up your Shell/Terminal ---"
 echo "--------------------------------------"
 echo -e "\nAll existing files will be moved to <FILE>.bak."
 echo "Do you wish to install this program?"
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes)   echo "Starting script ...";;
-        No)    exit && echo "---INFO: Aborting.";;
-    esac
-done
+read -p "Is this a good question (y/n)? " answer
+case ${answer:0:1} in
+    y|Y )
+        echo "Starting Script ...";;
+    n|N )
+        echo "Aborting ...";exit;;
+    * )
+        echo "Input not valid.";exit;;
+esac
 
 # sync dotfiles
 rsync -rb --suffix=".bak" $vBASEDIR/dotfiles/ ~ && echo -e "--- INFO: Copying dotfles successful.\n"
