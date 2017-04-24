@@ -15,18 +15,18 @@ vLIQPROMLINK="https://github.com/nojhan/liquidprompt.git"
 rsync -rb --suffix=".bak" $vBASEDIR/dotfiles/ ~
 
 # sync binaries
-rsync -rb --suffix=".bak" --exclude="setup.sh" $vBASEDIR/bin $vBINDIR
+rsync -rb --suffix=".bak" --exclude="$(basename $0)" $vBASEDIR/bin $vBINDIR
 
 # check terminator config
 # need to write function to query installed software on multiple distros first
 
 # optional: clone/setup liquidprompt
 ($vLIQPROM) && {
-    if [ ! $PROMPT_COMMAND = "_lp_set_prompt" ];then # something's wrong
+    if [[ $PROMPT_COMMAND != "_lp_set_prompt" ]];then
         if [ -d $vGITDIR/liquidprompt ]; then
             echo "--- ERROR: Directory $vGITDIR/liquidprompt already exists,"
             echo "--- although I couldn't find active Liquidprompt ..."
-            echo "--- Aborting. Please check configuration!\n" -e
+            echo -e "--- Aborting. Please check configuration!\n" 
             exit 1
         else
             [ ! -d $vGITDIR ] && mkdir $vGITDIR
@@ -36,5 +36,5 @@ rsync -rb --suffix=".bak" --exclude="setup.sh" $vBASEDIR/bin $vBINDIR
     rsync -b --suffix=".bak" $vBASEDIR/liquidprompt/.liquidpromptrc ~
 }
 
-echo -e "\n--- Process finished ..."
-echo -e "--- Please run the following command once \e[32msource ~/.bashrc\e[0m"
+echo -e "--- Process finished ..."
+echo -e "--- Please run the following command once \e[32msource ~/.bashrc\e[0m\n"
