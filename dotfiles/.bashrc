@@ -1,10 +1,10 @@
 # author: togra93
-# last modification: 2017-03-14
+# last modification: 2017-03-31
 # this is my own .bashrc, customized to my personal needs
 
-USER_PATHS=~/bin/ # add paths with leading colon
+USER_PATHS=~/bin # add paths with leading colon
 USER_FILES=(~/.bash_aliases ~/.bash_functions) # add files with leading space
-LPDIR=~/.liquidprompt/
+LPDIR=~/git/liquidprompt
 IFS_ORIG=$IFS
 
 # source global definitions
@@ -28,5 +28,5 @@ case $- in
     # set dircolors 
     [ -e ~/.dir_colors ] && eval `dircolors ~/.dir_colors` 
     # load liquid prompt
-    [ -d $LPDIR ] && . ${LPDIR}liquidprompt && source ~/.liquidpromptrc
+    [ -d $LPDIR ] && . ${LPDIR}/liquidprompt && source ~/.liquidpromptrc
 esac

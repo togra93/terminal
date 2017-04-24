@@ -14,7 +14,6 @@ alias grep="grep $vCOL"
 alias ls="ls $vCOL"
 alias la="ls -al"
 alias ll="ls -l"
-alias vserver='ssh -p 54321  root@37.120.167.70'
 alias doc2pdf='libreoffice --headless --convert-to pdf'
 alias hg='history | grep '
 alias upgrep="pgrep -u $(whoami) -la"
