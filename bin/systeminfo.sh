@@ -1,5 +1,5 @@
 # author: togra93
-# last updated: 2017-03-15
+# last updated: 2017-03-24
 # collecting and displaying system information
 
 delimiter(){
@@ -25,15 +25,25 @@ ramfreegb=$(echo "scale=2;$ramfree/1000000"|bc)
 uptime=$(uptime | grep -o '[0-9] days')
 if [[ -z $uptime ]];then uptime='less than 1 day';fi
 
+primnic=$(route | grep -i "^default" | grep -io "[^ ]*$")
+
 # display collected information
 echo -e "\e[1m$(delimiter)\e[21m"
 echo -e "Welcome, \e[32m$(whoami)\e[0m\n"
-echo -e "\e[1mHost:\t\e[21m$HOSTNAME\t\e[1mUptime:\t\e[21m$uptime"
-echo -e "\e[1mOS:\t\e[21m$os\e[22m"
-echo -e "\e[1mCPU:\t\e[21m$processor"
-echo -e "\e[1mRAM:\t\e[21m$ramtotalgb GB\t\t\e[1mFree:\t\e[21m$ramfreegb GB"
+echo -e "\e[1mHost:\t\t\e[21m$HOSTNAME"
+echo -e "\e[1mUptime:\t\t\e[21m$uptime"
+echo -e "\e[1mOS:\t\t\e[21m$os\e[22m"
+echo -e "\e[1mCPU:\t\t\e[21m$processor"
+echo -e "\e[1mRAM (total):\t\e[21m$ramtotalgb GB"
+echo -e "\e[1mRAM (free):\t\e[21m$ramfreegb GB"
+myj=1
+for i in $primnic;do
+    echo -e "\e[1mDefault NIC($myj):\t\e[21m$i\t$(nmcli dev show $i | egrep -i "(domain|type)" | grep -io "[^ ]*$")" | tr "\n" " "
+    echo ""
+    ((myj=myj+1))
+done
 
-echo -ne "\e[1mUsers on this machine:\t\e[21m"
+echo -ne "\e[1mUsers:\t\t\e[21m"
 if [ -z "$(echo -n $others)" ]; then
         echo "Nobody else ..."
 else
