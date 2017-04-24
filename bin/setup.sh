@@ -7,18 +7,44 @@
 vBASEDIR=$(pwd | sed s#"/bin$"##)
 vBINDIR=~/bin
 vGITDIR=~/git
-
-# set true, if you want to check and even clone the liquidprompt setup
-vLIQPROM=true
+vLIQPROM=false
 vLIQPROMLINK="https://github.com/nojhan/liquidprompt.git"
-vPROMPT_COMMAND='_lp_set_prompt'
+vTERMINATOR=false
+
+# query options liquidprompt/terminator
+vOPTS='lth'
+if [ ! -z $1 ]; then
+    while getopts "$vOPTS" opt;do
+        case ${opt} in
+            l ) vLIQPROM=true;;
+            t ) vTERMINATOR=true;;
+            * ) help();;
+        esac
+    done
+fi
+
+# help
+help ()
+{
+cat<<EOF
+Configure Shell/Terminal
+(dotfiles, binaries, extra packages)
+Usage: $(basename $0) [-l] [-t]
+
+Options:
+    -h          Display this help message
+    -l          Set up Liquidprompt
+    -t          Set up Terminator
+EOF
+exit
+}
 
 # information
 clear
 echo "--------------------------------------"
 echo "--- Setting up your Shell/Terminal ---"
 echo "--------------------------------------"
-echo -e "\nAll existing files will be moved to <FILE>.bak."
+echo -e "\nAlready existing files will be moved to <FILE>.bak."
 read -p "Do you want to run this script (y/n)?" answer
 case ${answer:0:1} in
     y|Y )
@@ -26,7 +52,7 @@ case ${answer:0:1} in
     n|N )
         echo "Aborting ...";exit;;
     * )
-        echo "Input not valid.";exit;;
+        echo "Input not valid ...";exit;;
 esac
 
 # sync dotfiles
@@ -39,8 +65,11 @@ rsync -rb --suffix=".bak" --exclude="$(basename $0)" $vBASEDIR/bin/* $vBINDIR &&
 
 # check terminator config
 # need to write function to query installed software on multiple distros first
+($vTERMINATOR) && {
 
-# optional: clone/setup liquidprompt
+}
+
+# clone/setup liquidprompt
 ($vLIQPROM) && {
     if [ -d $vGITDIR ];then
     {
