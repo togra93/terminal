@@ -50,7 +50,8 @@ if [ ! -z "$primnic" ];then
     for i in $primnic;do
         mytype=$(nmcli dev show $i | grep -i "type" | grep -io "[^ ]*$")
         mydomain=$(nmcli dev show $i | grep -i "domain" | grep -io "[^ ]*$")
-        echo -e "\e[1mDefault NIC($myj):\t\e[21m$i ($mytype)\n\t\t$mydomain"
+        echo -e "\e[1mDefault NIC($myj):\t\e[21m$i ($mytype)"
+        echo -e "\e[1mDomain:\t\t\e[21m$mydomain"
         ((myj=myj+1))
     done
 else

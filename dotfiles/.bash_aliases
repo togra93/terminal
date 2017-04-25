@@ -19,7 +19,7 @@ alias hg='history | grep '
 alias upgrep="pgrep -u $(whoami) -la"
 
 # work
-[ $HOME = "/u/g/grau" -o $(domainname) = "ITWM" -o $(domainname) = "BEEHIVE" ] && {
+[ $HOME = "/u/g/grau" ] && {
     alias cdberichtsheft="cd ~/pc/Dokumente/berichtsheft/$(date +%Y)"
     alias cdexchange='cd /m/scratch/itwm/0_EXCHANGE/'
     alias cdslgdoc='cd /p/slg/Dokumente'
