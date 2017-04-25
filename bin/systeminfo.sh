@@ -46,7 +46,7 @@ fi
 
 # check network interfaces
 myj=1
-if [ ! -z $primnic ];then
+if [ ! -z "$primnic" ];then
     for i in $primnic;do
         mytype=$(nmcli dev show $i | grep -i "type" | grep -io "[^ ]*$")
         mydomain=$(nmcli dev show $i | grep -i "domain" | grep -io "[^ ]*$")
