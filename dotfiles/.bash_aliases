@@ -20,7 +20,7 @@ alias hg='history | grep '
 alias upgrep="pgrep -u $(whoami) -la"
 alias backup="cp "$1"{,.bak}"
 alias dusort="du ./.[!.]* ./* -k --max-depth=0 | sort -n"
-alias busy="cat /dev/urandom | hexdump -C | grep "ca fe""
+alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 
 # work
 [ $HOME = "/u/g/grau" ] && {
