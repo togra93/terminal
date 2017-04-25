@@ -19,7 +19,7 @@ processor=$(cat /proc/cpuinfo | grep -m 1 'model name' | sed -r s/'^.*: '//)
 ramtotal=$(cat /proc/meminfo | grep -i 'memtotal' | grep -o '[0-9]*')
 ramtotalgb=$(echo "scale=2;$ramtotal/1000000"|bc)
 
-ramfree=$(cat /proc/meminfo | grep -i 'memfree' | grep -o '[0-9]*')
+ramfree=$(cat /proc/meminfo | grep -i 'memavailable' | grep -o '[0-9]*')
 ramfreegb=$(echo "scale=2;$ramfree/1000000"|bc)
 
 uptime=$(uptime | grep -o '[0-9] days')
@@ -35,11 +35,12 @@ echo -e "\e[1mUptime:\t\t\e[21m$uptime"
 echo -e "\e[1mOS:\t\t\e[21m$os\e[22m"
 echo -e "\e[1mCPU:\t\t\e[21m$processor"
 echo -e "\e[1mRAM (total):\t\e[21m$ramtotalgb GB"
-echo -e "\e[1mRAM (free):\t\e[21m$ramfreegb GB"
+echo -e "\e[1mRAM (avail.):\t\e[21m$ramfreegb GB"
 myj=1
 for i in $primnic;do
-    echo -e "\e[1mDefault NIC($myj):\t\e[21m$i\t$(nmcli dev show $i | egrep -i "(domain|type)" | grep -io "[^ ]*$")" | tr "\n" " "
-    echo ""
+    mytype=$(nmcli dev show $i | grep -i "type" | grep -io "[^ ]*$")
+    mydomain=$(nmcli dev show $i | grep -i "domain" | grep -io "[^ ]*$")
+    echo -e "\e[1mDefault NIC($myj):\t\e[21m$i ($mytype)\n\t\t$mydomain"
     ((myj=myj+1))
 done
 
