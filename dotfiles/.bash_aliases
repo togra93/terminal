@@ -1,5 +1,5 @@
 # author: togra93
-# last modification: 2017-03-17
+# last modification: 2017-04-25
 # my own aliases, customized to my personal needs
 # enabling on a per host basis
 
@@ -14,10 +14,13 @@ alias grep="grep $vCOL"
 alias ls="ls $vCOL"
 alias la="ls -al"
 alias ll="ls -l"
+alias vi="vim"
 alias doc2pdf='libreoffice --headless --convert-to pdf'
 alias hg='history | grep '
 alias upgrep="pgrep -u $(whoami) -la"
-alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
+alias backup="cp "$1"{,.bak}"
+alias dusort="du ./.[!.]* ./* -k --max-depth=0 | sort -n"
+alias busy="cat /dev/urandom | hexdump -C | grep "ca fe""
 
 # work
 [ $HOME = "/u/g/grau" ] && {

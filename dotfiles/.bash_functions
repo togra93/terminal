@@ -45,14 +45,12 @@ function mcd ()
     cd $1
 }
 
-# backup a file (<FILE>.bak)
-function backup() 
+function tree()
 {
-    cp "$1"{,.bak}
+    ls -R | grep ":$" \
+        | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
 }
 
-# funny
-function busy()
-{
-    cat /dev/urandom | hexdump -C | grep "ca fe"
-}
+# same working experience on different distributions
+
+#...
