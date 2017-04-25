@@ -17,6 +17,7 @@ alias ll="ls -l"
 alias doc2pdf='libreoffice --headless --convert-to pdf'
 alias hg='history | grep '
 alias upgrep="pgrep -u $(whoami) -la"
+alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 
 # work
 [ $HOME = "/u/g/grau" ] && {
