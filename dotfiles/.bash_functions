@@ -1,6 +1,6 @@
 #!/bin/bash
 # author: togra93
-# last modification: 2017-04-25
+# last modification: 2017-04-26
 # customized functions to facilitate my life
 
 # extract files
