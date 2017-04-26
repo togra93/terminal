@@ -1,0 +1,83 @@
+#!/bin/bash
+# author: togra93
+# last modification: 2017-04-26
+# keep same working experience on different distributions
+
+myprogname=$(basename $0)
+myopts='h:q:s:i:pu'
+
+myapt=false
+myyum=false
+mypacman=false
+myzypper=false
+
+# determine os and packet manager
+myOS=$(cat /etc/os-release | grep -i "^name=" | sed -r s/"(NAME=|\")"//g | tr '[:upper:]' '[:lower:]')
+[[ "$myOS" =~ .*(redhat|red hat|fedora|centos|cent os).* ]] && myyum=true
+[[ "$myOS" =~ .*(debian|ubuntu).* ]] && myapt=true
+[[ "$myOS" =~ .*arch.* ]] && mypacman=true
+[[ "$myOS" =~ .*suse.* ]] && myzypper=true
+
+# get options
+if [ ! -z $1 ];then
+{
+    while getopts "$myopts" opt;do
+    {
+        case ${opt} in
+            h) displayhelp;;
+            q) myquery;;
+            s) mysearch;;
+            i) myinstall;;
+            p) mypurge;;
+            u) myupdate;;
+            *) displayhelp;;    
+        esac
+    }
+    done
+}
+else
+    displayhelp
+fi
+
+function displayhelp()
+{
+cat<<EOF
+--- $myprogname ---
+Work with packages on multiple distributions using the same commands.
+Currently supported: Debian,Ubuntu,Arch,Red Hat,Fedora,CentOS,Suse
+Usage: $myprogname <options>
+
+Options:
+    -h          Display this help message
+    -q PATTERN  Query installed software
+    -s PATTERN  Search by pattern
+    -i PACKAGE  Install package
+    -p PACKAGE  Purge
+    -u          Update package list and system
+EOF
+}
+
+function myquery()
+{
+    :
+}
+
+function mysearch()
+{
+    :
+}
+
+function myinstall()
+{
+    :
+}
+
+function mypurge()
+{
+    :
+}
+
+function myupdate()
+{
+    :
+}

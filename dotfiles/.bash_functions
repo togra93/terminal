@@ -50,7 +50,3 @@ function tree()
     ls -R | grep ":$" \
         | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
 }
-
-# same working experience on different distributions
-
-#...
