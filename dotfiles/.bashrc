@@ -15,6 +15,9 @@ for i in ${USER_FILES[@]};do
     [ -e $i ] && . $i
 done
 
+# call custom function to manage packages
+[ -e ~/.bash_functions ] && mypkg
+
 # export user specific paths (e.g. for own binaries, ...)
 IFS=$':'
 for i in $USER_PATHS;do
@@ -25,8 +28,8 @@ IFS=$IFS_ORIG
 # only in interactive shells
 case $- in
     *i*)
-    # set dircolors 
-    [ -e ~/.dir_colors ] && eval `dircolors ~/.dir_colors` 
+    # set dircolors
+    [ -e ~/.dir_colors ] && eval `dircolors ~/.dir_colors`
     # load liquid prompt
     [ -d $LPDIR ] && . ${LPDIR}/liquidprompt && source ~/.liquidpromptrc
     # fancy man pages
@@ -36,5 +39,5 @@ case $- in
     export LESS_TERMCAP_se=$(printf '\e[0m') # leave standout mode
     export LESS_TERMCAP_so=$(printf '\e[01;33m') # enter standout mode – yellow
     export LESS_TERMCAP_ue=$(printf '\e[0m') # leave underline mode
-    export LESS_TERMCAP_us=$(printf '\e[04;36m') # enter underline mode – cyan  
+    export LESS_TERMCAP_us=$(printf '\e[04;36m') # enter underline mode – cyan
 esac
