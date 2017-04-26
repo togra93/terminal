@@ -63,7 +63,7 @@ function mypkg()
 
   # determine os and packet manager
   myOS=$(cat /etc/os-release | grep -i "^name=" | sed -r s/"(NAME=|\")"//g | tr '[:upper:]' '[:lower:]')
-  [[ "$myOS" =~ .*(redhat|red hat|fedora|centos|cent os).* ]] && myyum=true
+  [[ "$myOS" =~ .*(red\ {0,1}hat|fedora|cent\ {0,1}os).* ]] && myyum=true
   [[ "$myOS" =~ .*(debian|ubuntu).* ]] && myapt=true
   [[ "$myOS" =~ .*arch.* ]] && mypacman=true
   [[ "$myOS" =~ .*suse.* ]] && myzypper=true
