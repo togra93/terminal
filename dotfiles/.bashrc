@@ -1,6 +1,6 @@
 # author: togra93
 # last modification: 2017-04-26
-# this is my own .bashrc, customized to my personal needs
+# custom .bashrc
 
 USER_PATHS=~/bin # add paths with leading colon
 USER_FILES=(~/.bash_aliases ~/.bash_functions) # add files with leading space
@@ -30,8 +30,10 @@ case $- in
     *i*)
     # set dircolors
     [ -e ~/.dir_colors ] && eval `dircolors ~/.dir_colors`
+
     # load liquid prompt
     [ -d $LPDIR ] && . ${LPDIR}/liquidprompt && source ~/.liquidpromptrc
+
     # fancy man pages
     export LESS_TERMCAP_mb=$(printf '\e[01;31m') # enter blinking mode – red
     export LESS_TERMCAP_md=$(printf '\e[01;35m') # enter double-bright mode – bold, magenta

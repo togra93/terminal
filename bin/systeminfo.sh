@@ -29,7 +29,7 @@ primnic=$(route | grep -i "^default" | grep -io "[^ ]*$")
 
 # display collected information
 echo -e "\e[1m$(delimiter)\e[21m"
-echo -e "Welcome, \e[32m$(whoami)\e[0m\n"
+echo -e "Hello, \e[32m$(whoami)\e[0m\n"
 echo -e "\e[1mHost:\t\t\e[21m$HOSTNAME"
 echo -e "\e[1mUptime:\t\t\e[21m$uptime"
 echo -e "\e[1mOS:\t\t\e[21m$os\e[22m"
@@ -41,6 +41,7 @@ echo -e "\e[1mRAM (total):\t\e[21m$ramtotalgb GB"
 if [ ! -z $ramfree ];then
     echo -e "\e[1mRAM (avail.):\t\e[21m$ramfreegb GB"
 else
+# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=34e431b0ae398fc54ea69ff85ec700722c9da773
     echo -e "\e[1mRAM (avail.):\t\e[21mCan't determine avail. RAM\n\t\tKernel too old?"
 fi
 
@@ -55,7 +56,8 @@ if [ ! -z "$primnic" ];then
         ((myj=myj+1))
     done
 else
-    echo -e "\e[1mDefault NIC:\t\e[21mCan't determine NIC (missing privileges?)"
+    echo -e "\e[1mDefault NIC:\t\e[21mCan't determine NIC."
+    echo "\t\tNo privleges or tool missing (nmcli, route)?"
 fi
 
 # display users on the system (format)

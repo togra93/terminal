@@ -1,9 +1,9 @@
 #!/bin/bash
 # author: togra93
 # last modification: 2017-04-26
-# customized functions to facilitate my life
+# custom functions
 
-# extract files
+# extract files of various archives
 function extract()
 {
      if [ -f $1 ] ; then
@@ -45,6 +45,7 @@ function mcd ()
     cd $1
 }
 
+# display working directory as a tree
 function tree()
 {
     ls -R | grep ":$" \

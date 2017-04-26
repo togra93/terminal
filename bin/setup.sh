@@ -1,8 +1,8 @@
 #!/bin/bash
 # author: togra93
-# last updated: 2017-04-24
+# last updated: 2017-04-26
 # configure shell, using given files
-# basically backup old ones and create symlinks
+# back up already existing files and copy new ones
 
 vBASEDIR=$(pwd | sed s#"/bin$"##)
 vBINDIR=~/bin
@@ -38,7 +38,7 @@ if [ ! -z $1 ];then
             * ) displayhelp;exit;;
         esac
     }
-    done 
+    done
 fi
 
 # information

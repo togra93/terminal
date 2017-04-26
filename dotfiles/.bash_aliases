@@ -1,9 +1,9 @@
 # author: togra93
-# last modification: 2017-04-25
-# my own aliases, customized to my personal needs
-# enabling on a per host basis
+# last modification: 2017-04-26
+# custom aliases, depending on current host
 
 # global
+# general
 vCOL="--color=auto"
 alias cd..='cd ..'
 alias cd2.='cd ../..'
@@ -15,11 +15,15 @@ alias ls="ls $vCOL"
 alias la="ls -al"
 alias ll="ls -l"
 alias vi="vim"
-alias doc2pdf='libreoffice --headless --convert-to pdf'
-alias hg='history | grep '
+alias hg="history | grep"
 alias upgrep="pgrep -u $(whoami) -la"
 alias backup="cp "$1"{,.bak}"
 alias dusort="du ./.[!.]* ./* -k --max-depth=0 | sort -n"
+
+# application specific
+[ -e /usr/bin/libreoffice ] && alias doc2pdf='libreoffice --headless --convert-to pdf'
+
+# fun
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
 
 # work
@@ -33,7 +37,7 @@ alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\""
     alias wts='xfreerdp --sec rdp -g 1915x1155 -T wts001it wts001it &'
     alias rdp='xfreerdp --sec rdp -g 1024x768'
     alias dellrma='cat ~/pc/Dokumente/dell/rma_help.txt'
-} 
+}
 
 # vserver
 
