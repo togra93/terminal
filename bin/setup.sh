@@ -84,7 +84,7 @@ rsync -rb --suffix=".bak" --exclude="$(basename $0)" $vBASEDIR/bin/* $vBINDIR &&
     }
     else
     {
-        [ ! -d $vGITDIR ] && mkdir $vGITDIR
+        mkdir $vGITDIR
         git clone -q $vLIQPROMLINK $vGITDIR/liquidprompt && \
             echo -e "--- INFO: Successfully cloned into liquidprompt!\n"
             echo "--- If liquidprompt is already on the system, but located elsewhere,"
