@@ -1,5 +1,5 @@
 # author: togra93
-# last modification: 2017-03-31
+# last modification: 2017-04-26
 # this is my own .bashrc, customized to my personal needs
 
 USER_PATHS=~/bin # add paths with leading colon
