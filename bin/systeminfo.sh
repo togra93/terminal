@@ -1,5 +1,5 @@
 # author: togra93
-# last updated: 2017-03-25
+# last updated: 2017-04-25
 # collecting and displaying system information
 
 delimiter(){
