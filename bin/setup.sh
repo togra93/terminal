@@ -87,11 +87,12 @@ rsync -rb --suffix=".bak" --exclude="$(basename $0)" $vBASEDIR/bin/* $vBINDIR &&
         [ ! -d $vGITDIR ] && mkdir $vGITDIR
         git clone -q $vLIQPROMLINK $vGITDIR/liquidprompt && \
             echo -e "--- INFO: Successfully cloned into liquidprompt!\n"
+            echo "--- If liquidprompt is already on the system, but located elsewhere,"
+            echo "    you can run rm -rf $vGITDIR/liquidprompt"
     }
     fi
     rsync -b --suffix=".bak" $vBASEDIR/liquidprompt/.liquidpromptrc ~
 }
-
 
 echo "--- Setting up your Terminal is now finished."
 echo -e "--- Please run the following command once \e[32msource ~/.bashrc\e[0m\n"
