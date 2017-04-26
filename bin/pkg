@@ -21,19 +21,16 @@ myOS=$(cat /etc/os-release | grep -i "^name=" | sed -r s/"(NAME=|\")"//g | tr '[
 # get options
 if [ ! -z $1 ];then
 {
-    while getopts "$myopts" opt;do
-    {
-        case ${opt} in
-            h) displayhelp;;
-            q) myquery;;
-            s) mysearch;;
-            i) myinstall;;
-            p) mypurge;;
-            u) myupdate;;
-            *) displayhelp;;    
-        esac
-    }
-    done
+    getopts "$myopts" opt
+    case ${opt} in
+        h) displayhelp;;
+        q) myquery;;
+        s) mysearch;;
+        i) myinstall;;
+        p) mypurge;;
+        u) myupdate;;
+        *) displayhelp;;    
+    esac
 }
 else
     displayhelp
@@ -45,7 +42,7 @@ cat<<EOF
 --- $myprogname ---
 Work with packages on multiple distributions using the same commands.
 Currently supported: Debian,Ubuntu,Arch,Red Hat,Fedora,CentOS,Suse
-Usage: $myprogname <options>
+Usage: $myprogname <option>
 
 Options:
     -h          Display this help message
