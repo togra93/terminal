@@ -70,7 +70,7 @@ function mypkg()
   # determine os and packet manager
   myOS=$(cat /etc/os-release | grep -i "^name=" | sed -r s/"(NAME=|\")"//g | tr '[:upper:]' '[:lower:]')
   [[ "$myOS" =~ .*(red\ {0,1}hat|fedora|cent\ {0,1}os).* ]] && myyum=true
-  [[ "$myOS" =~ .*(debian|ubuntu).* ]] && myapt=true
+  [[ "$myOS" =~ .*(debian|ubuntu|mint).* ]] && myapt=true
   [[ "$myOS" =~ .*arch.* ]] && mypacman=true
   [[ "$myOS" =~ .*suse.* ]] && myzypper=true
 
@@ -79,32 +79,32 @@ function mypkg()
   {
       alias pkgq="rpm -qa | grep -i"
       alias pkgs="yum search"
-      alias pkgi="yum install"
-      alias pkgr="yum erase"
-      alias pkgu="yum check-update && yum update"
+      alias pkgi="sudo yum install"
+      alias pkgr="sudo yum erase"
+      alias pkgu="yum check-update && sudo yum update"
   }
   ($myapt) &&
   {
       alias pkgq="dpkg -l | grep -i"
       alias pkgs="apt-cache search"
-      alias pkgi="apt-get install"
-      alias pkgr="apt-get remove"
-      alias pkgu="apt-get update && apt-get upgrade"
+      alias pkgi="sudo apt-get install"
+      alias pkgr="sudo apt-get remove"
+      alias pkgu="sudo apt-get update && sudo apt-get upgrade"
   }
   ($mypacman) &&
   {
       alias pkgq="pacman -Q | grep -i"
       alias pkgs="pacman -Ss"
-      alias pkgi="pacman -S"
-      alias pkgr="pacman -R"
-      alias pkgu="pacman -Sy && pacman -Su"
+      alias pkgi="sudo pacman -S"
+      alias pkgr="sudo pacman -R"
+      alias pkgu="sudo pacman -Sy && sudo pacman -Su"
   }
   ($myzypper) &&
   {
       alias pkgq="zypper search -is | grep -i"
       alias pkgs="zypper search -t pattern"
-      alias pkgi="zypper install"
-      alias pkgr="zypper remove"
-      alias pkgu="zypper refresh && zypper update"
+      alias pkgi="sudo zypper install"
+      alias pkgr="sudo zypper remove"
+      alias pkgu="sudo zypper refresh && sudo zypper update"
   }
 }
