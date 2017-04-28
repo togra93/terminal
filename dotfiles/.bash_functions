@@ -52,6 +52,12 @@ function tree()
         | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
 }
 
+# du with dotfiles and sorted output
+function dusort()
+{
+    du $1.[!.]* $1* -k --max-depth=0 2>/dev/null | sort -n
+}
+
 # use the same commands on multiple distributions to manage packages
 # called once in ~/.bashrc
 function mypkg()

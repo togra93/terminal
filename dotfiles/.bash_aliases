@@ -18,7 +18,6 @@ alias vi="vim"
 alias hg="history | grep"
 alias upgrep="pgrep -u $(whoami) -la"
 alias backup="cp "$1"{,.bak}"
-alias dusort="du ./.[!.]* ./* -k --max-depth=0 | sort -n"
 
 # application specific
 [ -e /usr/bin/libreoffice ] && alias doc2pdf='libreoffice --headless --convert-to pdf'
