@@ -55,7 +55,9 @@ function tree()
 # du with dotfiles and sorted output
 function dusort()
 {
-    du $1.[!.]* $1* -k --max-depth=0 2>/dev/null | sort -n
+    mydir=$1
+    [ "$1" = '.' ] && mydir='./' 
+    du $mydir.[!.]* $mydir* -k --max-depth=0 2>/dev/null | sort -n
 }
 
 # use the same commands on multiple distributions to manage packages
